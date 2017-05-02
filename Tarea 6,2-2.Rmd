@@ -1,0 +1,59 @@
+---
+title: "Maiz"
+author: "Carmina Martinez Gonzalez"
+date: 01/Mayo/2017
+output: html_document
+---
+
+
+####Cargamos el archivo __maizteocintle_SSNP50k_meta_extended.txt__
+####El tipo de archivo que se genera es un data frame a partir de un un archivo en formato .txt
+
+```{r}
+fullmat <- read.delim("../meta/maizteocintle_SNP50k_meta_extended.txt", header = TRUE, stringsAsFactors = FALSE, check.names = F)
+str(fullmat)
+```
+
+
+####Cambiar nombre de la columna *"Año de colecta"* por *"Fecha_de_colecta"*
+
+```{r}
+colnames(fullmat)[which(names(fullmat) == "AÌ±o._de_colecta")] <- "Fecha_de_colecta"
+str(fullmat)
+```
+
+
+####Ver las primeras 6 lineas del archivo
+
+```{r}
+head(fullmat)
+```
+
+
+####Numero de muestras
+
+```{r}
+nrow(fullmat)
+```
+
+####Estados donde se colectaron las muestras
+
+```{r}
+xtabs(~Estado, data = fullmat)
+```
+
+
+####Muestras colectadas antes de 1980
+
+```{r}
+fecha<- xtabs(~Origen, data = fullmat)
+print(fecha)
+```
+
+####Muestras por cada raza
+
+```{r}
+xtabs(~Raza_Primaria, data = fullmat)
+```
+
+
